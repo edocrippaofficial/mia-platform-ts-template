@@ -31,8 +31,8 @@ npm run dev
 ## Contributing
 Please use `npm run commit` to add and commit your changes keeping the messages format consistent.
 
-[pipeline]: %CUSTOM_PLUGIN_PROJECT_GIT_PATH%/badges/master/pipeline.svg
-[coverage]: %CUSTOM_PLUGIN_PROJECT_GIT_PATH%/badges/master/coverage.svg
-[git-link]: %CUSTOM_PLUGIN_PROJECT_GIT_PATH%
+[git-link]: <replace with your git link>
+[pipeline]: <replace with your git link>/badges/master/pipeline.svg
+[coverage]: <replace with your git link>/badges/master/coverage.svg
 
 [nvm]: https://github.com/creationix/nvm
