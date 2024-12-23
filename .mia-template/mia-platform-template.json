@@ -1,7 +1,7 @@
 {
   "name": "Typescript Template",
   "description": "Microservice with a Typescript setup",
-  "tenantId": "1f46d9ed-9a06-4722-9dbd-6181ff4c4005",
+  "tenantId": "<change with your tenant id>",
   "type": "template",
   "itemId": "typescript-template",
   "repositoryUrl": "https://github.com/edocrippaofficial/mia-platform-ts-template",
