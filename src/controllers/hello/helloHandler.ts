@@ -1,4 +1,4 @@
-import { Counter } from 'prom-client'
+import type { Counter } from 'prom-client'
 import { getCustomMetric } from '../../metrics/customMetrics'
 
 import type { Envs } from '../../config/envs'
