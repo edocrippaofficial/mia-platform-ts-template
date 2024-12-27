@@ -4,7 +4,7 @@ import MiaHotStart from 'mia-hot-start'
 import getDefaultFastifyOptions from './config/defaultFastifyOptions'
 import { envSchema } from './config/envs'
 
-import { addCustomMetric } from './metrics/customMetrics'
+import { addCustomMetric } from './utils/customMetrics'
 
 import helloRoute from './controllers/hello'
 

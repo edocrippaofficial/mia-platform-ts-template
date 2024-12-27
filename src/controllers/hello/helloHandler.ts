@@ -1,5 +1,5 @@
 import type { Counter } from 'prom-client'
-import { getCustomMetric } from '../../metrics/customMetrics'
+import { getCustomMetric } from '../../utils/customMetrics'
 
 import type { Envs } from '../../config/envs'
 import type { TypedReply, TypedRequest } from '../../config/types'
