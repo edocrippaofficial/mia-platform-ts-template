@@ -28,10 +28,10 @@ npm run dev
 
 ## IDE tests integrations
 
-This project uses the official [node test runner][node-test]. In order to execute Typescript files it has to install ts-node with the `--register command`.
+This project uses the official [node test runner][node-test]. In order to execute Typescript files you have to install ts-node with the `--register command`.
 
 ### Terminal
-If you use the packsge.json scripts from the terminal it's already set up.
+If you use the package.json scripts from the terminal it's already set up.
 
 ### WebStorm
 If you use WebStorm, it's already set up by JetBrains (upgrade to the last version to be sure).
