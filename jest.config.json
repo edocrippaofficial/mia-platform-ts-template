@@ -1,9 +1,0 @@
-{
-  "preset": "ts-jest",
-  "testEnvironment": "node",
-  "testMatch": [
-    "**/*.test.ts"
-  ],
-  "collectCoverageFrom": ["src/**/*.ts", "!**/node_modules/**"],
-  "coverageReporters": ["html", "text", "text-summary", "cobertura"]
-}

@@ -1,27 +1,44 @@
+import { describe, it, before, afterEach, mock, after } from 'node:test'
+import { equal, deepEqual } from 'node:assert/strict'
 import type { FastifyInstance } from 'fastify'
 import { setupFastify } from '../../../app'
 import { testEnvs } from '../../../__test__/testUtils'
 
-import { HelloService } from '../../../services/hello/hello'
-jest.mock('../../../services/hello/hello')
+import * as helloServiceModule from '../../../services/hello/hello'
 
-describe('hello route', () => {
+describe('hello route', async() => {
   let server: FastifyInstance
-  let mockService: jest.Mocked<HelloService>
+  let mockService: any
+  let originalHelloService: any
 
-  beforeAll(async() => {
+  before(async() => {
+    originalHelloService = helloServiceModule.HelloService
+
+    mockService = {
+      greet: mock.fn(),
+    }
+
+    // @ts-ignore
+    helloServiceModule.HelloService = function HelloService() {
+      return mockService
+    }
+
     server = await setupFastify(testEnvs)
-
-    mockService = new HelloService({} as any) as jest.Mocked<HelloService>
-    (HelloService as jest.Mock).mockReturnValue(mockService)
   })
 
   afterEach(() => {
-    jest.clearAllMocks()
+    mock.reset()
+  })
+
+  after(() => {
+    // @ts-ignore
+    helloServiceModule.HelloService = originalHelloService
   })
 
   it('should return 200 if the greet is successful', async() => {
-    mockService.greet.mockResolvedValue({ hello: 'John' })
+    mockService.greet.mock.mockImplementation(async() => {
+      return { hello: 'John' }
+    })
 
     const response = await server.inject({
       method: 'GET',
@@ -33,23 +50,28 @@ describe('hello route', () => {
       },
     })
 
-    // API
-    expect(response.statusCode).toEqual(200)
-    expect(JSON.parse(response.payload)).toEqual({
+    // API assertions
+    equal(response.statusCode, 200)
+    deepEqual(JSON.parse(response.payload), {
       hello: 'John',
     })
 
-    // Service
+    // Service assertions
     const expectedData = { id: '1' }
-    expect(mockService.greet).toHaveBeenCalledTimes(1)
-    expect(mockService.greet).toHaveBeenCalledWith(expectedData)
+    const serviceArguments = { ...mockService.greet.mock.calls[0].arguments[0] }
+    equal(mockService.greet.mock.callCount(), 1)
+    deepEqual(serviceArguments, expectedData)
   })
 
   it('should return 4xx if the service throws with a 4xx error', async() => {
-    const serviceError = new Error() as any
+    // Setup dell'errore per questo test
+    const serviceError = new Error('service error') as any
     serviceError.statusCode = 404
-    serviceError.message = 'service error'
-    mockService.greet.mockRejectedValue(serviceError)
+
+    // Setup del mock per questo test
+    mockService.greet.mock.mockImplementation(async() => {
+      throw serviceError
+    })
 
     const response = await server.inject({
       method: 'GET',
@@ -61,9 +83,8 @@ describe('hello route', () => {
       },
     })
 
-    // API
-    expect(response.statusCode).toEqual(serviceError.statusCode)
-    expect(JSON.parse(response.payload).message).toEqual(serviceError.message)
+    // API assertions
+    equal(response.statusCode, serviceError.statusCode)
+    equal(JSON.parse(response.payload).message, serviceError.message)
   })
 })
-

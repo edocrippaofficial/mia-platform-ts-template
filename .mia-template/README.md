@@ -28,6 +28,34 @@ To start the development server, execute this command:
 npm run dev
 ```
 
+## IDE tests integrations
+
+This project uses the official [node test runner][node-test]. In order to execute Typescript files it has to install ts-node with the `--register command`.
+
+### Terminal
+If you use the packsge.json scripts from the terminal it's already set up.
+
+### WebStorm
+If you use WebStorm, it's already set up by JetBrains (upgrade to the last version to be sure).
+
+### VSCode
+If you use VSCode, install [this extension][nodejs-testing-vscode]: this provides integration with VS Code.  
+In order to execute Typescript files follow the instructions and add an object like this one in the VSCode settings.json file:
+```json
+{
+    "nodejs-testing.extensions": [
+        {
+            "extensions": ["mjs", "cjs", "js"],
+            "parameters": []
+        },
+        {
+            "extensions": ["mts", "cts", "ts"],
+            "parameters": ["--require", "ts-node/register"]
+        }
+    ]
+}
+```
+
 ## Contributing
 Please use `npm run commit` to add and commit your changes keeping the messages format consistent.
 
@@ -36,3 +64,6 @@ Please use `npm run commit` to add and commit your changes keeping the messages 
 [coverage]: <replace with your git link>/badges/master/coverage.svg
 
 [nvm]: https://github.com/creationix/nvm
+
+[node-test]: https://nodejs.org/api/test.html
+[nodejs-testing-vscode]: https://marketplace.visualstudio.com/items?itemName=connor4312.nodejs-testing

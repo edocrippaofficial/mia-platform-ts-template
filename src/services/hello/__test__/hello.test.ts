@@ -2,6 +2,9 @@ import axios from 'axios'
 import Pino from 'pino'
 import nock from 'nock'
 
+import { it, describe } from 'node:test'
+import assert from 'node:assert/strict'
+
 import { HelloService } from '../hello'
 
 describe('Hello', () => {
@@ -20,8 +23,8 @@ describe('Hello', () => {
     const service = new HelloService({ logger, httpClient: axiosInstance })
     const response = await service.greet(input)
 
-    expect(response).toEqual({ hello: 'John' })
-    expect(serverMock.isDone()).toBeTruthy()
+    assert.deepEqual(response, { hello: 'John' })
+    assert.ok(serverMock.isDone())
   })
 })
 
