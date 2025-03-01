@@ -7,7 +7,7 @@ include:
     ref: "master"
 
 default:
-  image: node:iron-alpine
+  image: node:23.9.0-alpine
 
 variables:
   IMAGE_NAME: mia_template_image_name_placeholder
