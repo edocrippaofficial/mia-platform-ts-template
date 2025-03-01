@@ -13,7 +13,7 @@ variables:
   IMAGE_NAME: mia_template_image_name_placeholder
 
 test:
-  coverage: '/All files\s+\|\s+\d+/'
+  coverage: '/All files(?:[^|]*\|){4}\s*(\S+)/'
   artifacts:
     paths:
       - coverage/
