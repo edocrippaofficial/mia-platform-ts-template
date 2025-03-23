@@ -14,6 +14,7 @@
     "unit": "node --require ts-node/register --test --test-reporter spec --test-reporter-destination stdout",
     "test": "npm run lint && npm run unit",
     "coverage": "c8 --reporter=cobertura --reporter=text npm run unit -- --test-reporter junit --test-reporter-destination junit.xml",
+    "coverage:html": "c8 --reporter=html -o /tmp/c8-coverage npm run unit && open /tmp/c8-coverage/index.html || xdg-open /tmp/c8-coverage/index.html",
     "prepare": "husky || true",
     "commit": "git add --all && cz",
     "update-docker-version": "sed -i.bck \"s|version=\\\"[0-9]*\\.[0-9]*\\.[0-9]*.*\\\"|version=\\\"${npm_package_version}\\\"|\" Dockerfile",
