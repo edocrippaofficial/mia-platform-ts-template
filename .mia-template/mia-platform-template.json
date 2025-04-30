@@ -16,6 +16,9 @@
     "name": "1.0.0",
     "releaseNote": "https://raw.githubusercontent.com/edocrippaofficial/mia-platform-ts-template/main/CHANGELOG.md"
   },
+  "image": {
+    "localPath": "./image.png"
+  },
   "resources":{
     "services": {
       "typescript-template": {
